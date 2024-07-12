@@ -11,14 +11,16 @@ const app = express();
 
 require("dotenv").config();
 // MongoDB connection
-connectMongoDB("mongodb://127.0.0.1:27017/Recipies");
+// connectMongoDB("mongodb://127.0.0.1:27017/Recipies");
+connectMongoDB("mongodb://127.0.0.1:27017/FYP");
 const PORT = process.env.PORT || 8080;
 
 app.get("/ping", (req, res) => {
   res.send("PONG");
 });
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 app.use("/auth", AuthRouter);
 
