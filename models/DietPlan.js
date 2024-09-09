@@ -11,9 +11,9 @@ const dietPlanSchema = new mongoose.Schema({
   dietaryPreference: { type: String, required: true },
   goal: { type: String, required: true },
   illness: { type: Boolean, required: true },
-  planDetails: { type: String, required: true },
-
-  // responsetwo : { type: String, required: true },  for example 
+  // planDetails: { type: String, required: true },
+  responseone:{ type: String, required: true },
+  responsetwo : { type: String, required: true },  //  for second response example 
 });
 
 // Create the Diet Plan model

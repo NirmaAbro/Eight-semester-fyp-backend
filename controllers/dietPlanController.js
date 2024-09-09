@@ -12,7 +12,9 @@ const saveDietPlan = async (req, res) => {
     dietaryPreference,
     goal,
     illness,
-    planDetails,
+    // planDetails,
+    responseone,
+    responsetwo
   } = req.body;
 
   try {
@@ -26,7 +28,9 @@ const saveDietPlan = async (req, res) => {
       dietaryPreference,
       goal,
       illness,
-      planDetails,
+      // planDetails,
+      responseone,
+      responsetwo,
     });
 
     await newDietPlan.save();
