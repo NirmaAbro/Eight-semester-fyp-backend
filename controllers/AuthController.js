@@ -113,7 +113,39 @@ const login = async (req, res) => {
   }
 };
 
+// Middleware to authenticate the user using JWT
+const authenticate = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1]; // Get the token from the header
+  if (!token) {
+    return res.status(401).json({ message: "Authorization token is missing" });
+  }
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: "Invalid token" });
+    }
+    req.userId = decoded._id; // Save user ID for later use
+    next();
+  });
+};
+
+// New API endpoint to get user information
+const getUserInfo = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId).select("-password"); // Exclude password from the response
+    if (!user) {
+      return res.status(404).json({ message: "User not found", success: false });
+    }
+    res.status(200).json({ success: true, user });
+  } catch (err) {
+    console.error("Error retrieving user information:", err);
+    res.status(500).json({ message: "Internal server error", success: false });
+  }
+};
+
+
+
 module.exports = {
   signup,
   login,
+  getUserInfo,
 };

@@ -52,7 +52,8 @@ app.get("/ping", (req, res) => {
   res.send("PONG");
 });
 
-app.use(express.json());
+app.use(express.json()); //Ensures that your Express app can parse incoming JSON data.
+// cors(): Allows your app to accept requests from different origins, enabling cross-domain API calls.
 app.use(cors());
 
 // Use the Auth and diet plan routes
