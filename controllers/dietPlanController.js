@@ -34,12 +34,12 @@ const saveDietPlan = async (req, res) => {
     });
 
     await newDietPlan.save();
-    res.status(201).json({ message: "Diet Plan saved successfully" });
-    console.log("Diet plan saved successfully");
+    res.status(201).json({ message: "Diet Plan saved successfully into database" });
+    console.log("Diet plan saved successfully into database");
   } catch (error) {
-    console.error("Error saving diet plan:", error);
-    res.status(500).json({ message: "Failed to save diet plan" });
-    console.log("Failed to save diet plan");
+    console.error("Error saving diet plan into database:", error);
+    res.status(500).json({ message: "Failed to save diet plan into database" });
+    console.log("Failed to save diet plan into database");
   }
 };
 

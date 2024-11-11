@@ -38,6 +38,8 @@ const AuthRouter = require("./routes/AuthRouter");
 const dietPlanRoutes = require("./routes/dietPlanRoutes");
 const { connectMongoDB } = require("./config/connection");
 require("dotenv").config();
+const userProfileRoutes = require("./routes/UserProfileRoute");
+// import userProfileRoutes from "./routes/userProfileRoutes.js";
 
 console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
@@ -56,9 +58,16 @@ app.use(express.json()); //Ensures that your Express app can parse incoming JSON
 // cors(): Allows your app to accept requests from different origins, enabling cross-domain API calls.
 app.use(cors());
 
+app.use((req, res, next) => {
+  console.log(`Received request: ${req.method} ${req.url}`);
+  next();
+});
+
+
 // Use the Auth and diet plan routes
 app.use("/auth", AuthRouter);
 app.use("/api", dietPlanRoutes); // Correct route usage
+app.use("/api/user-profile", userProfileRoutes);  // Attach userProfileRoutes to /api/user-profile
 
 // Start the server
 app.listen(PORT, () => {
