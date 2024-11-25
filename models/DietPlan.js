@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 // Define the Diet Plan schema
 const dietPlanSchema = new mongoose.Schema({
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
   name: { type: String, required: true },
   age: { type: Number, required: true },
   gender: { type: String, required: true },
@@ -12,8 +17,8 @@ const dietPlanSchema = new mongoose.Schema({
   goal: { type: String, required: true },
   illness: { type: Boolean, required: true },
   // planDetails: { type: String, required: true },
-  responseone:{ type: String, required: true },
-  responsetwo : { type: String, required: true },  //  for second response example 
+  responseone: { type: String, required: true },
+  responsetwo: { type: String, required: true }, //  for second response example
 });
 
 // Create the Diet Plan model

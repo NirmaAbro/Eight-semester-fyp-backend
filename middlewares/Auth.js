@@ -17,8 +17,22 @@ const ensureAuthenticated = (req, res, next) => {
   }
 };
 
+// const authenticate = (req, res, next) => {
+//   const token = req.headers.authorization?.split(" ")[1]; // Get the token from the header
+//   if (!token) {
+//     return res.status(401).json({ message: "Authorization token is missing" });
+//   }
+//   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+//     if (err) {
+//       return res.status(403).json({ message: "Invalid token" });
+//     }
+//     req.userId = decoded._id; // Save user ID for later use
+//     next();
+//   });
+// };
+
 const authenticate = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1]; // Get the token from the header
+  const token = req.headers.authorization?.split(" ")[1]; // Extract token from "Bearer <token>"
   if (!token) {
     return res.status(401).json({ message: "Authorization token is missing" });
   }
@@ -26,12 +40,13 @@ const authenticate = (req, res, next) => {
     if (err) {
       return res.status(403).json({ message: "Invalid token" });
     }
-    req.userId = decoded._id; // Save user ID for later use
+    req.userId = decoded._id; // Attach the user ID to the request
     next();
   });
 };
 
-module.exports={
-    authenticate,
-    ensureAuthenticated
-}
+
+module.exports = {
+  authenticate,
+  ensureAuthenticated,
+};
